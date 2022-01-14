@@ -1,5 +1,5 @@
 import java.util.HashMap;
-import java.util.Set;
+// import java.util.Set;
 
 public class Hashmatique {
 
@@ -19,10 +19,11 @@ public class Hashmatique {
 
         // Iterate over trackList and print the key:value pairs
         // Get the keys using the keySet method
-        Set<String> lyrics = trackList.keySet();
-        for(String track: lyrics) {
-            System.out.println(track);
-            System.out.println(trackList.get(track));
+        // Set<String> lyrics = trackList.keySet();
+        for(String key: trackList.keySet()) {
+            // System.out.println(key);
+            // System.out.println(trackList.get(key));
+            System.out.printf("Track: %s \nLyrics: %s\n", key, trackList.get(key));
         }
 
 
