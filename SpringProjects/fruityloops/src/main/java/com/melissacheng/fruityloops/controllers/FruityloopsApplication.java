@@ -1,0 +1,13 @@
+package com.melissacheng.fruityloops.controllers;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class FruityloopsApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(FruityloopsApplication.class, args);
+	}
+
+}
