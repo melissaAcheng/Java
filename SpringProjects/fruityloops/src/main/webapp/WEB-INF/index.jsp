@@ -6,7 +6,7 @@
 <html class="h-100 bg-secondary">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Fruit Store</title>
 <!-- import bootstrap -->
 <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css" />
 <!-- import js file -->
