@@ -20,7 +20,7 @@
 					<h5 class="card-title">Farm</h5>
 					<p class="card-text">(earns 10-20 gold)</p>
 					<form action="/findGold" method="post">
-						<input type="hidden" name="gold" id="farm" value="15"/>
+						<input type="hidden" name="location" value="farm"/>
 						<input type="submit" value="Find Gold!"/>
 					</form>
 				</div>
@@ -32,7 +32,7 @@
 					<h5 class="card-title">Cave</h5>
 					<p class="card-text">(earns 5-10 gold)</p>
 					<form action="/findGold" method="post">
-						<input type="hidden" name="gold" id="cave" value="7"/>
+						<input type="hidden" name="location" value="cave"/>
 						<input type="submit" value="Find Gold!"/>
 					</form>
 				</div>
@@ -44,7 +44,7 @@
 					<h5 class="card-title">House</h5>
 					<p class="card-text">(earns 2-5 gold)</p>
 					<form action="/findGold" method="post">
-						<input type="hidden" name="gold" id="house" value="5"/>
+						<input type="hidden" name="location" value="house"/>
 						<input type="submit" value="Find Gold!"/>
 					</form>
 				</div>
@@ -56,7 +56,7 @@
 					<h5 class="card-title">Casino!</h5>
 					<p class="card-text">(earns/takes 0-50 gold)</p>
 					<form action="/findGold" method="post">
-						<input type="hidden" name="gold" id="casino" value="50"/>
+						<input type="hidden" name="location" value="casino"/>
 						<input type="submit" value="Find Gold!"/>
 					</form>
 				</div>
@@ -65,9 +65,18 @@
 	</div>
 	<div>
 		<h2>Activities:</h2>
+		<form action="/restart" method="post" class="mb-2">
+			<input type="submit" value="Restart Game" />
+		</form>
 		<div>
 			<c:forEach var="play" items="${ plays }">
-				<p>You entered a <c:out value="${ play.location }"></c:out> and earned <c:out value="${ play.gold }"></c:out> gold at <c:out value="${ play.date }"></c:out></p>
+				<c:if test = "${ play.gold > 0 }">
+					<p class="text-success">You entered a <c:out value="${ play.location }"></c:out> and earned <c:out value="${ play.gold }"></c:out> gold (<c:out value="${ play.date }"></c:out>)</p>
+				</c:if>
+				<c:if test = "${ play.gold < 0 }">
+					<p class="text-danger">You entered a <c:out value="${ play.location }"></c:out> and lost <c:out value="${ play.gold }"></c:out> gold at (<c:out value="${ play.date }"></c:out>)</p>
+				</c:if>
+				
 			</c:forEach>
 		</div>
 	</div>

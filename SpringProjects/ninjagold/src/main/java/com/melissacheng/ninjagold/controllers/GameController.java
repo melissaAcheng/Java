@@ -1,6 +1,7 @@
 package com.melissacheng.ninjagold.controllers;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import javax.servlet.http.HttpSession;
 
@@ -22,14 +23,32 @@ public class GameController {
 	
 	@PostMapping("/findGold")
 	public String earnGold(
-			@RequestParam(value="gold") Integer goldAmount,
+			@RequestParam(value="location") String location,
 			HttpSession session
 			) {
 		
+		System.out.println(location);
+		
 		@SuppressWarnings("unchecked")
+		
 		ArrayList<Plays> plays = (session.getAttribute("plays") == null) ? new ArrayList<Plays>() : (ArrayList<Plays>) session.getAttribute("plays");
 		
-		plays.add(new Plays(goldAmount, "Farm"));
+		Random random = new Random();
+		
+		if (location.equals("farm")) {
+			int goldAmount = random.nextInt(10,20);
+			plays.add(new Plays(goldAmount, "Farm"));
+		} else if (location.equals("cave")) {
+			int goldAmount = random.nextInt(5,10);
+			plays.add(new Plays(goldAmount, "Cave"));
+		} else if (location.equals("house")) {
+			int goldAmount = random.nextInt(2,5);
+			plays.add(new Plays(goldAmount, "House"));
+		} else if (location.equals("casino")) {
+			int goldAmount = random.nextInt(-50,50);
+			plays.add(new Plays(goldAmount, "Casino"));
+		}
+		
 		session.setAttribute("plays", plays);
 		
 		
@@ -53,5 +72,14 @@ public class GameController {
 		
 		
 		return "index.jsp";
+	}
+	
+	@PostMapping("/restart")
+	public String restartGame(HttpSession session) {
+		if (session.getAttribute("plays") != null) {
+			session.invalidate();
+			Plays.totalGold = 0;
+		}
+		return "redirect:/gold";
 	}
 }
