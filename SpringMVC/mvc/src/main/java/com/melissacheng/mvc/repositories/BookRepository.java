@@ -15,6 +15,6 @@ public interface BookRepository extends CrudRepository<Book, Long>{
 	List<Book> findByDescriptionContaining(String search);
 	// Counts how many titles contain a certain string
 	Long countByTitleContaining(String search);
-	// Deletes a book that starts with a specific title
+	// Deletes a book that starts with a specific titlem 
 	Long deleteByTitleStartingWith(String search);
 }
