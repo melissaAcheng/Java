@@ -1,6 +1,7 @@
 package com.melissacheng.expenses.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,6 +28,27 @@ public class ExpenseService {
 	// Add an expense
 	public Expense addExpense(Expense expense) {
 		return expenseRepository.save(expense);
+	}
+	
+	// Retrieve one expense
+	public Expense findExpense(Long id) {
+		Optional<Expense> optionalExpense = expenseRepository.findById(id);
+		if (optionalExpense.isPresent()) {
+			return optionalExpense.get();
+		} else {
+			return null;
+		}
+	}
+	
+	// Update expense
+	public Expense updateExpense(Expense expense) {
+		return expenseRepository.save(expense);
+	}
+	
+	// Delete expense
+	public Expense deleteExpense(Long id) {
+		expenseRepository.deleteById(id);
+		return null;
 	}
 	
 }
