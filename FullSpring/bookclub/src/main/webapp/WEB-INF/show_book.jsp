@@ -18,5 +18,8 @@
 		<h3>Here are <c:out value="${ book.getUser().userName }"></c:out>'s thoughts:</h3>
 		<p>"<c:out value="${ book.thoughts }"></c:out>"</p>
 	</div>
+	<c:if test="${ user_id == book.getUser().id }">
+		<a href="/books/${ book.id }/edit">Edit</a>		
+	</c:if>
 </body>
 </html>

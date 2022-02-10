@@ -35,7 +35,7 @@ public class Book {
 	private String author;
 	
 	@NotEmpty(message="*required")
-	@Size(min=3, max=200, message="Must be at least 3 characters")
+	@Size(min=3, max=500, message="Must be at least 3 characters")
 	private String thoughts;
 	
 	@Column(updatable=false)
