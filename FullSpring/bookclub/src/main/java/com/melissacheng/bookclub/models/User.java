@@ -58,6 +58,9 @@ public class User {
 	@OneToMany(mappedBy="user", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	private List<Book> books;
 	
+	@OneToMany(mappedBy="borrower", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	private List<Book> borrowedBooks;
+	
 	public User() {
 		
 	}
@@ -102,6 +105,22 @@ public class User {
 		this.confirm = confirm;
 	}
 	
+	public List<Book> getBooks() {
+		return books;
+	}
+
+	public void setBooks(List<Book> books) {
+		this.books = books;
+	}
+
+	public List<Book> getBorrowedBooks() {
+		return borrowedBooks;
+	}
+
+	public void setBorrowedBooks(List<Book> borrowedBooks) {
+		this.borrowedBooks = borrowedBooks;
+	}
+
 	@PrePersist
     protected void onCreate(){
         this.createdAt = new Date();

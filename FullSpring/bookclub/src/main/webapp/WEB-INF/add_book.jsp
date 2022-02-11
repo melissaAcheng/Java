@@ -15,7 +15,7 @@
 	</div>
 	<div>
 		<form:form action="/books" method="post" modelAttribute="book">
-			<form:input type="hidden" path="id"/>
+		<%-- 	<form:input type="hidden" path="id"/> --%>
 			<div class="mb-3">
 				<form:label path="title" class="form-label">Title</form:label>
 				<form:errors path="title" class="text-danger"/>

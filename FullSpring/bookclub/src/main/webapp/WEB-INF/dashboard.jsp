@@ -16,25 +16,81 @@
 	</div>
 	
 	<div>
-		<h3>Bookshelf</h3>
+		<h2 class="mb-3 text-primary">Bookshelf</h2>
+		<h3>Available Books:</h3>
 		<table class="table">
 		  <thead>
 		    <tr>
 		      <th scope="col">ID</th>
 		      <th scope="col">Title</th>
 		      <th scope="col">Author Name</th>
-		      <th scope="col">Posted By</th>	      
+		      <th scope="col">Owner</th>	
+		      <th scope="col">Actions</th>
+		      <th scope="col"></th>
 		    </tr>
 		  </thead>
 		  <tbody>
 			<c:forEach var="book" items="${ books }">
 			<tr>
-		      <td><c:out value="${ book.id }"></c:out></td>
-		      <td><a href="/books/${book.id}"><c:out value="${ book.title }"></c:out></a></td>
-		      <td><c:out value="${ book.author }"></c:out></td>
-		      <td><c:out value="${ book.getUser().userName }"></c:out></td>
+				<c:choose>
+					<c:when test="${ book.getBorrower().id == null && user_id != book.getUser().id }">
+						<td><c:out value="${ book.id }"></c:out></td>
+						<td><a href="/books/${book.id}"><c:out value="${ book.title }"></c:out></a></td>
+						<td><c:out value="${ book.author }"></c:out></td>
+						<td><c:out value="${ book.getUser().userName }"></c:out></td>
+						<td><a href="/books/${ book.id }/borrow">Borrow</a></td>
+					</c:when>
+					<c:when test = "${ book.getBorrower().id == null && user_id == book.getUser().id }">
+						<td><c:out value="${ book.id }"></c:out></td>
+						<td><a href="/books/${book.id}"><c:out value="${ book.title }"></c:out></a></td>
+						<td><c:out value="${ book.author }"></c:out></td>
+						<td><c:out value="${ book.getUser().userName }"></c:out></td>
+						<td><a href="/books/${ book.id }/edit">Edit</a></td>	
+		   				<td><a href="/books/${ book.id }/delete">Delete</a></td>	
+					</c:when>
+					<c:when test = "${ book.getBorrower().id != null && user_id != book.getUser().id }">
+						
+					</c:when>
+					<c:when test = "${ book.getBorrower().id != null && user_id == book.getUser().id }">
+						<td><c:out value="${ book.id }"></c:out></td>
+						<td><a href="/books/${book.id}"><c:out value="${ book.title }"></c:out></a></td>
+						<td><c:out value="${ book.author }"></c:out></td>
+						<td><c:out value="${ book.getUser().userName }"></c:out></td>
+						<td><a href="/books/${ book.id }/edit">Edit</a></td>	
+		   				<td><a href="/books/${ book.id }/delete">Delete</a></td>
+					</c:when>
+				      
+				
+				</c:choose>
+				
 		    </tr>
 			</c:forEach>
+		  </tbody>
+		</table>
+	</div>
+	
+	<div>
+		<h3>Books I'm Borrowing:</h3>
+		<table class="table">
+		  <thead>
+		    <tr>
+		      <th scope="col">ID</th>
+		      <th scope="col">Title</th>
+		      <th scope="col">Author Name</th>
+		      <th scope="col">Owner</th>	
+		      <th scope="col">Actions</th>
+		    </tr>
+		  </thead>
+		  <tbody>
+			<c:forEach var="borrowed_book" items="${ borrowed_books }">
+			<tr>
+		      <td><c:out value="${ borrowed_book.id }"></c:out></td>
+		      <td><a href="/books/${borrowed_book.id}"><c:out value="${ borrowed_book.title }"></c:out></a></td>
+		      <td><c:out value="${ borrowed_book.author }"></c:out></td>
+		      <td><c:out value="${ borrowed_book.getUser().userName }"></c:out></td>
+		      <td><a href="/books/${ borrowed_book.id }/return">Return</a></td>
+		    </tr>
+			</c:forEach>	
 		  </tbody>
 		</table>
 	</div>

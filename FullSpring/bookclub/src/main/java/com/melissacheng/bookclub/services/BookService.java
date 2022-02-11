@@ -23,6 +23,7 @@ public class BookService {
 	public List<Book> allBooks() {
 		return bookRepository.findAll();
 	}
+	
 
 	// Add a Book
 	public Book addBook(Long userId, Book Book) {
@@ -34,6 +35,7 @@ public class BookService {
 		
 		return bookRepository.save(Book);
 	}
+	
 
 	// Retrieve one Book
 	public Book findBook(Long id) {
@@ -43,6 +45,11 @@ public class BookService {
 		} else {
 			return null;
 		}
+	}
+	
+	// Retrieve all books with specific borrower_id
+	public List<Book> retreiveBorrowedBooks(Long borrower_id) {
+		return bookRepository.findByBorrowerId(borrower_id);
 	}
 
 	// Update Book
@@ -55,5 +62,7 @@ public class BookService {
 		bookRepository.deleteById(id);
 		return null;
 	}
+
+	
 
 }
