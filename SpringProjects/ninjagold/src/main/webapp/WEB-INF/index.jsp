@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+
 <!DOCTYPE html>
 <html class="h-100">
 <head>
@@ -71,10 +73,10 @@
 		<div>
 			<c:forEach var="play" items="${ plays }">
 				<c:if test = "${ play.gold > 0 }">
-					<p class="text-success">You entered a <c:out value="${ play.location }"></c:out> and earned <c:out value="${ play.gold }"></c:out> gold (<c:out value="${ play.date }"></c:out>)</p>
+					<p class="text-success">You entered a <c:out value="${ play.location }"></c:out> and earned <c:out value="${ play.gold }"></c:out> gold (<fmt:formatDate type="both" dateStyle = "medium" timeStyle="medium" value="${play.date }"/>)</p>
 				</c:if>
 				<c:if test = "${ play.gold < 0 }">
-					<p class="text-danger">You entered a <c:out value="${ play.location }"></c:out> and lost <c:out value="${ play.gold }"></c:out> gold at (<c:out value="${ play.date }"></c:out>)</p>
+					<p class="text-danger">You entered a <c:out value="${ play.location }"></c:out> and lost <c:out value="${ play.gold }"></c:out> gold at (<fmt:formatDate type="both" dateStyle = "medium" timeStyle="medium" value="${play.date }"/>)</p>
 				</c:if>
 				
 			</c:forEach>
