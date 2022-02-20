@@ -1,9 +1,7 @@
 package com.melissacheng.studentroster.models;
 
 import java.util.Date;
-import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,52 +10,37 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-
 @Entity
-@Table(name="students")
-public class Student {
+@Table(name="students_classes")
+public class StudentClass {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	private String fullName;
-
 	@Column(updatable=false)
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date createdAt;
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date updatedAt;
-
+	
 	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="dorm_id")
-	private Dorm dorm;
+	@JoinColumn(name="student_id")
+	private Student student;
 	
-	@OneToMany(mappedBy="student", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JsonIgnore
-	private List<StudentClass> studentsClasses;
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="classes_id")
+	private Classes classes;
 	
-
-	public Student() {
+	public StudentClass() {
 		
 	}
-
-	public List<StudentClass> getStudentsClasses() {
-		return studentsClasses;
-	}
-
-	public void setStudentsClasses(List<StudentClass> studentsClasses) {
-		this.studentsClasses = studentsClasses;
-	}
-	
 
 	public Long getId() {
 		return id;
@@ -67,24 +50,21 @@ public class Student {
 		this.id = id;
 	}
 
-	public String getFullName() {
-		return fullName;
+	public Student getStudent() {
+		return student;
 	}
 
-	public void setFullName(String fullName) {
-		this.fullName = fullName;
+	public void setStudent(Student student) {
+		this.student = student;
 	}
 
-	public Dorm getDorm() {
-		return dorm;
+	
+	public Classes getClasses() {
+		return classes;
 	}
 
-	public void setDorm(Dorm dorm) {
-		this.dorm = dorm;
-	}
-
-	public void removeDorm() {
-		this.dorm = null;
+	public void setClasses(Classes classes) {
+		this.classes = classes;
 	}
 
 	@PrePersist

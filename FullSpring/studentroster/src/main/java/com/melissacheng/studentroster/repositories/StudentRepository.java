@@ -13,5 +13,5 @@ public interface StudentRepository extends CrudRepository <Student, Long> {
 	List<Student> findAll();
 	
 	List<Student> findByDorm_IdIsNull();
-
+	
 }

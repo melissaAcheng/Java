@@ -11,30 +11,35 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>New Question</title>
+<title>Show Class</title>
 <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" href="/css/main.css"> <!-- change to match your file/naming structure -->
 <script src="/webjars/jquery/jquery.min.js"></script>
 <script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
 </head>
 <body class="container">
+		<h1>${ classClass.classname }</h1>
 	<div>
-		<h1>What is your question?</h1>
-		<form:form action="/questions" method="post" modelAttribute="newQuestion">
-			<div class="mb-3">
-				<form:label path="question" class="form-label">Question:</form:label>
-				<form:errors path="question" class="text-danger"/>
-				<form:input class="form-control" path="question"/>
-			</div>
-			<div class="mb-3">
-				<form:label path="tags" class="form-label">Tags:</form:label>
-				<form:errors path="tags" class="text-danger"/>
-				<form:input class="form-control" path="tags"/>
-			</div>
-			<input type="submit" value="Submit" />
-		</form:form>
+		<h3>Students: </h3>
+	</div>
+	<div>
+		<table class="table">
+		  <thead>
+		    <tr>
+		      <th scope="col">Student Name</th>
+		    </tr>
+		  </thead>
+		  <tbody>
+		  <c:forEach var="studentsClasses" items="${ classClass.studentsClasses }">
+		  	<tr>
+		  		<td><a href="/students/${ studentsClasses.student.id }"><c:out value="${ studentsClasses.student.fullName }"></c:out></a></td>
+		  	</tr>		  
+		  </c:forEach>
+
+		  </tbody>
+		</table>
 	</div>
 	
-	<a href="/questions">Dashboard</a>
+	<a href="/classes/new">All Classes</a>
 </body>
 </html>
